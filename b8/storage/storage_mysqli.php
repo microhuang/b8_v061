@@ -117,7 +117,8 @@ class b8_storage_mysqli extends b8_storage_base
 			
 			if(mysqli_connect_error())
 				throw new Exception('b8_storage_mysqli: ' . mysqli_connect_error());
-				
+			else
+				mysqli_query($this->_connection, 'set names utf8');
 		}
 		
 		# Check to see if the wordlist table exists

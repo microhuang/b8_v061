@@ -410,7 +410,7 @@ class b8
 			return self::TRAINER_TEXT_MISSING;
 		if($category === NULL)
 			return self::TRAINER_CATEGORY_MISSING;
-			
+	
 		return $this->_process_text($text, $category, self::LEARN);
 		
 	}
@@ -456,7 +456,7 @@ class b8
 		
 		# Get all tokens from $text
 		$tokens = $this->lexer->get_tokens($text);
-		
+	
 		# Check if the lexer failed
 		# (if so, $tokens will be a lexer error code, if not, $tokens will be an array)
 		if(!is_array($tokens))

@@ -278,7 +278,7 @@ abstract class b8_storage_base
 					$internals['texts_spam']--;
 			}
 		}
-		
+	
 		$this->_update(self::INTERNALS_TEXTS, array('count_ham' => $internals['texts_ham'], 'count_spam' => $internals['texts_spam']));
 		
 		# We're done and can commit all changes to the database now
