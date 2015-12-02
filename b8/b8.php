@@ -33,7 +33,7 @@ class b8
 	const DBVERSION = 3;
 	
 	public $config = array(
-		'lexer'        => 'default',
+		'lexer'        => 'phrase',//'default',
 		'degenerator'  => 'default',
 		'storage'      => 'dba',
 		'use_relevant' => 15,

@@ -27,7 +27,7 @@
  * @author Oliver Lillie (aka buggedcom) (original PHP 5 port)
  */
 
-class b8_lexer_default
+class b8_lexer_phrase
 {
 
 	const LEXER_TEXT_NOT_STRING = 'LEXER_TEXT_NOT_STRING';
@@ -37,8 +37,8 @@ class b8_lexer_default
 		'min_size'      => 3,
 		'max_size'      => 30,
 		'allow_numbers' => FALSE,
-		'get_uris'      => TRUE,
-		'old_get_html'  => TRUE,
+		'get_uris'      => FALSE,//TRUE,
+		'old_get_html'  => FALSE,//TRUE,
 		'get_html'      => FALSE,
 		'get_bbcode'    => FALSE
 	);
@@ -48,7 +48,7 @@ class b8_lexer_default
 	
 	# The regular expressions we use to split the text to tokens
 	public $regexp = array(
-		'raw_split' => '/[\s,\.\/"\:;\|<>\-_\[\]{}\+=\)\(\*\&\^%]+/',
+		'raw_split' => '/\s/',//'/[\s,\.\/"\:;\|<>\-_\[\]{}\+=\)\(\*\&\^%]+/',
 		'ip'        => '/([A-Za-z0-9\_\-\.]+)/',
 		'uris'      => '/([A-Za-z0-9\_\-]*\.[A-Za-z0-9\_\-\.]+)/',
 		'html'      => '/(<.+?>)/',
@@ -147,7 +147,7 @@ class b8_lexer_default
 		# Be sure not to return an empty array
 		if(count($this->_tokens) == 0)
 			$this->_tokens['b8*no_tokens'] = 1;
-		
+
 		# Return a list of all found tokens
 		return $this->_tokens;
 		
@@ -316,9 +316,13 @@ class b8_lexer_default
 	
 	private function _raw_split($text)
 	{
-		foreach(preg_split($this->regexp['raw_split'], $text) as $word) {
+		$mc=array();
+        preg_match_all("/(\".*\")|(\S+)/",$text,$mc);
+		if($mc && $mc[0]){
+		foreach($mc[0] as $word) {
 			# Check the word and add it to the token list if it's valid
 			$this->_add_token($word, FALSE, NULL);
+		}
 		}
 	}
 	

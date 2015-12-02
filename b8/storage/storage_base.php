@@ -197,7 +197,7 @@ abstract class b8_storage_base
 		$token_data = $this->_get_query(array_keys($tokens));
 		
 		# Process all tokens to learn/unlearn
-		
+	
 		foreach($tokens as $token => $count) {
 		
 			if(isset($token_data[$token])) {
